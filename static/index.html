@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mental Health Impact Predictor</title>
+  <meta name="description" content="Predict student mental health score from social media and lifestyle inputs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+
+  <main class="page-shell">
+    <section class="hero-card">
+      <div class="hero-copy">
+        <span class="eyebrow">Student Social Media Insight</span>
+        <h1>Mental Health Impact Predictor</h1>
+        <p>
+          Enter student lifestyle and social media details to get a clear, polished score prediction.
+          Built for fast use on mobile and laptop.
+        </p>
+        <div class="hero-stats">
+          <div>
+            <strong>12</strong>
+            <span>Input fields</span>
+          </div>
+          <div>
+            <strong>Fast</strong>
+            <span>API response</span>
+          </div>
+          <div>
+            <strong>Responsive</strong>
+            <span>Mobile friendly</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="result-card" id="resultCard">
+        <div class="result-card__header">
+          <span class="result-badge">Live Result</span>
+          <h2>Mental Health Score</h2>
+        </div>
+        <div class="result-empty" id="resultEmpty">
+          Fill the form and click predict to see the score here.
+        </div>
+        <div class="result-content hidden" id="resultContent">
+          <div class="score-ring">
+            <div class="score-ring__inner">
+              <span id="scoreValue">0.00</span>
+              <small>Predicted score</small>
+            </div>
+          </div>
+          <p class="score-note" id="scoreNote">Prediction will appear after submission.</p>
+        </div>
+        <div class="error-box hidden" id="errorBox"></div>
+      </aside>
+    </section>
+
+    <section class="form-card">
+      <div class="form-card__head">
+        <div>
+          <span class="section-label">Prediction Form</span>
+          <h2>StudentData Inputs</h2>
+        </div>
+        <p>All fields from the backend schema are included below.</p>
+      </div>
+
+      <form id="predictionForm" novalidate>
+        <div class="grid form-grid">
+          <label>
+            <span>Age</span>
+            <input type="number" name="age" min="10" max="100" required placeholder="18" />
+          </label>
+
+          <label>
+            <span>Gender</span>
+            <select name="gender" required>
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Country</span>
+            <select name="country" required>
+              <option value="">Select country</option>
+              <option value="Other">Other</option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+              <option value="UK">UK</option>
+              <option value="Germany">Germany</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Turkey">Turkey</option>
+              <option value="France">France</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Academic Level</span>
+            <select name="academic_level" required>
+              <option value="">Select academic level</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="High School">High School</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Most Used Platform</span>
+            <select name="most_used_platform" required>
+              <option value="">Select platform</option>
+              <option value="Facebook">Facebook</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Snapchat">Snapchat</option>
+              <option value="Twitter">Twitter</option>
+              <option value="YouTube">YouTube</option>
+              <option value="TikTok">TikTok</option>
+              <option value="LINE">LINE</option>
+              <option value="KakaoTalk">KakaoTalk</option>
+              <option value="VKontakte">VKontakte</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="WeChat">WeChat</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Purpose Of Use</span>
+            <select name="purpose_of_use" required>
+              <option value="">Select purpose</option>
+              <option value="Networking">Networking</option>
+              <option value="Education">Education</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="News">News</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Average Daily Usage Hours</span>
+            <input type="number" name="avg_daily_usage_hours" min="0" max="24" step="0.1" required placeholder="3.5" />
+          </label>
+
+          <label>
+            <span>Daily Unlocks</span>
+            <input type="number" name="daily_unlocks" min="0" step="1" required placeholder="15" />
+          </label>
+
+          <label>
+            <span>Study Hours</span>
+            <input type="number" name="study_hours" min="0" max="24" step="0.1" required placeholder="4" />
+          </label>
+
+          <label>
+            <span>Physical Activity Hours</span>
+            <input type="number" name="physical_activity_hours" min="0" max="24" step="0.1" required placeholder="1" />
+          </label>
+
+          <label>
+            <span>Sleep Hours Per Night</span>
+            <input type="number" name="sleep_hours_per_night" min="0" max="24" step="0.1" required placeholder="7.5" />
+          </label>
+
+          <label>
+            <span>Stress Level</span>
+            <select name="stress_level" required>
+              <option value="">Select stress level</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Very High">Very High</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span class="btn-text">Predict Score</span>
+            <span class="btn-spinner hidden" id="btnSpinner"></span>
+          </button>
+          <button type="reset" class="reset-btn">Clear Form</button>
+        </div>
+
+        <p class="form-hint">Tip: all values are validated before sending, and backend errors are shown clearly.</p>
+      </form>
+    </section>
+  </main>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

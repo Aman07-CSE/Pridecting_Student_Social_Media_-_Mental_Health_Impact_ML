@@ -1,0 +1,456 @@
+:root {
+  --bg: #07111f;
+  --panel: rgba(9, 18, 33, 0.84);
+  --panel-strong: #0d1728;
+  --text: #eef4ff;
+  --muted: #94a3b8;
+  --accent: #7cdbb6;
+  --accent-2: #5aa7ff;
+  --danger: #ff6b7a;
+  --line: rgba(148, 163, 184, 0.2);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(90, 167, 255, 0.22), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(124, 219, 182, 0.2), transparent 30%),
+    linear-gradient(160deg, #050b14 0%, #07111f 45%, #0b1425 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+}
+
+.bg-shape {
+  position: fixed;
+  filter: blur(80px);
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-shape-1 {
+  top: -6rem;
+  left: -4rem;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(90, 167, 255, 0.24);
+}
+
+.bg-shape-2 {
+  right: -5rem;
+  bottom: -3rem;
+  width: 22rem;
+  height: 22rem;
+  background: rgba(124, 219, 182, 0.2);
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero-card,
+.form-card,
+.result-card {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(15, 24, 41, 0.92), rgba(8, 16, 30, 0.9));
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.hero-card {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 28px;
+}
+
+.hero-copy {
+  padding: 1rem 0.5rem;
+}
+
+.eyebrow,
+.section-label,
+.result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(124, 219, 182, 0.12);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-copy h1 {
+  margin: 1rem 0 0.85rem;
+  font-size: clamp(2.25rem, 4vw, 4.5rem);
+  line-height: 0.98;
+}
+
+.hero-copy p {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.hero-stats div {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-stats strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.hero-stats span {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.result-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem;
+  border-radius: 24px;
+}
+
+.result-card__header h2,
+.form-card__head h2 {
+  margin: 0.8rem 0 0;
+  font-size: 1.6rem;
+}
+
+.result-empty {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border-radius: 22px;
+  padding: 1.25rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.result-content {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  text-align: center;
+  min-height: 220px;
+}
+
+.result-card--animate {
+  animation: cardReveal 1s ease both;
+}
+
+.result-content--animate {
+  animation: contentReveal 1s ease both;
+}
+
+.score-ring {
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  padding: 12px;
+  background: conic-gradient(from 180deg, var(--accent-2), var(--accent), #ffd36b, var(--accent-2));
+  animation: rotateHue 10s linear infinite;
+}
+
+.score-ring__inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  background: var(--panel-strong);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#scoreValue {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.score-ring__inner small {
+  margin-top: -0.2rem;
+  color: var(--muted);
+}
+
+.score-note {
+  margin: 0;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.form-card {
+  margin-top: 1.4rem;
+  padding: 1.5rem;
+  border-radius: 28px;
+}
+
+.form-card__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-card__head p,
+.form-hint {
+  margin: 0;
+  color: var(--muted);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.55rem;
+}
+
+label span {
+  font-size: 0.9rem;
+  color: #d7e4ff;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  padding: 0.95rem 1rem;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+  color: rgba(148, 163, 184, 0.65);
+}
+
+input:focus,
+select:focus {
+  border-color: rgba(90, 167, 255, 0.8);
+  box-shadow: 0 0 0 4px rgba(90, 167, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+option {
+  color: #0b1220;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+.submit-btn,
+.reset-btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 0.95rem 1.4rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-width: 180px;
+  color: #07111f;
+  background: linear-gradient(135deg, #7cdbb6, #5aa7ff);
+  box-shadow: 0 16px 34px rgba(90, 167, 255, 0.3);
+}
+
+.reset-btn {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.submit-btn:hover,
+.reset-btn:hover {
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.78;
+  cursor: wait;
+  transform: none;
+}
+
+.btn-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(7, 17, 31, 0.25);
+  border-top-color: rgba(7, 17, 31, 1);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.error-box {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 107, 122, 0.3);
+  background: rgba(255, 107, 122, 0.1);
+  color: #ffd2d7;
+  line-height: 1.6;
+}
+
+.form-hint {
+  margin-top: 1rem;
+  font-size: 0.92rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateHue {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes cardReveal {
+  0% {
+    transform: translateY(14px) scale(0.98);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  60% {
+    transform: translateY(0) scale(1.01);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes contentReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats,
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .page-shell {
+    width: min(100% - 1rem, 1180px);
+    padding-top: 1rem;
+  }
+
+  .hero-card,
+  .form-card {
+    padding: 1rem;
+    border-radius: 22px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.15rem;
+  }
+
+  .hero-stats,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card__head {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .submit-btn,
+  .reset-btn {
+    width: 100%;
+  }
+
+  .score-ring {
+    width: 160px;
+    height: 160px;
+  }
+}
