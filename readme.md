@@ -100,10 +100,11 @@ Make sure the `static` folder and `Mental_Health_Model.pkl` file are included in
 
 ## Live Demo
 
-Add your deployed project link here after publishing:
+Added deployed project link here:
 
 ```text
-https://your-live-project-link.example.com
+[LIVE 
+Pridecting_Mental_Health_Impact_Of_Student_ML](https://pridecting-mental-health-impact-ml.onrender.com/)
 ```
 
 You can replace the placeholder with your actual Render, Railway, Azure, or other hosted URL.
